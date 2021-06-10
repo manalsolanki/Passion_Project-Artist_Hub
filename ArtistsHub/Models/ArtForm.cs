@@ -23,4 +23,14 @@ namespace ArtistsHub.Models
         //An art-form can belong to many artists.
         public ICollection<Artist> Artists { get; set; }
     }
+
+    public class ArtFormDto
+    {
+        public int ArtFormID { get; set; }
+
+        public string ArtFormName { get; set; }
+
+        public string DisciplineName { get; set; }
+
+    }
 }

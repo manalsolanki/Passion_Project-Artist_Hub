@@ -37,5 +37,7 @@ namespace ArtistsHub.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<ArtistsHub.Models.Artist> Artists { get; set; }
     }
 }
