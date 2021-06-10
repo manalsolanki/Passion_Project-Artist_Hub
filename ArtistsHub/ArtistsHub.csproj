@@ -186,7 +186,27 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106100215076_InitialCreate.cs" />
+    <Compile Include="Migrations\202106100215076_InitialCreate.Designer.cs">
+      <DependentUpon>202106100215076_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106100355063_Discipline.cs" />
+    <Compile Include="Migrations\202106100355063_Discipline.Designer.cs">
+      <DependentUpon>202106100355063_Discipline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106100410033_Art-Forms.cs" />
+    <Compile Include="Migrations\202106100410033_Art-Forms.Designer.cs">
+      <DependentUpon>202106100410033_Art-Forms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106100426581_artist-artForms.cs" />
+    <Compile Include="Migrations\202106100426581_artist-artForms.Designer.cs">
+      <DependentUpon>202106100426581_artist-artForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ArtForm.cs" />
+    <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\Discipline.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -264,6 +284,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202106100215076_InitialCreate.resx">
+      <DependentUpon>202106100215076_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106100355063_Discipline.resx">
+      <DependentUpon>202106100355063_Discipline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106100410033_Art-Forms.resx">
+      <DependentUpon>202106100410033_Art-Forms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106100426581_artist-artForms.resx">
+      <DependentUpon>202106100426581_artist-artForms.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
