@@ -32,6 +32,9 @@ namespace ArtistsHub.Models
         //Adding Art-Forms entity to our system.
         public DbSet<ArtForm> ArtForms { get; set; }
 
+        //Adding the Artist entity to our system.
+       // public DbSet<Artist>Artists { get; set; }
+
 
         public static ApplicationDbContext Create()
         {

@@ -181,8 +181,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArtFormController.cs" />
     <Compile Include="Controllers\ArtFormDataController.cs" />
     <Compile Include="Controllers\ArtistDataController.cs" />
+    <Compile Include="Controllers\DisciplineController.cs" />
     <Compile Include="Controllers\DisciplineDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -274,9 +276,14 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\ArtForm\List.cshtml" />
+    <Content Include="Views\ArtForm\Details.cshtml" />
+    <Content Include="Views\ArtForm\New.cshtml" />
+    <Content Include="Views\ArtForm\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Discipline\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
