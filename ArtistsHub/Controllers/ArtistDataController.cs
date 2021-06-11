@@ -18,26 +18,51 @@ namespace ArtistsHub.Controllers
 
         // GET: api/ArtistData/ListArtists
         [HttpGet]
-        public IQueryable<Artist> ListArtist()
+        public IEnumerable<ArtistDto> ListArtists()
         {
-            return db.Artists;
+
+            List<Artist> artists = db.Artists.ToList();
+            List<ArtistDto> artistDtos = new List<ArtistDto>();
+            artists.ForEach (element => artistDtos.Add(new ArtistDto()
+            {
+                ArtistID = element.ArtistID,
+                ArtistFirstName = element.ArtistFirstName,
+                ArtistLastName = element.ArtistLastName,
+                ArtistOccupation = element.ArtistOccupation,
+                ArtistDescription = element.ArtistDescription,
+                ArtistEmail = element.ArtistEmail,
+                ArtistPhoneNumber = element.ArtistPhoneNumber
+            })) ;
+                
+            return artistDtos;
         }
 
-        // GET: api/ArtistData/Updatertist/5
+        // GET: api/ArtistData/FindArtist/5
         [ResponseType(typeof(Artist))]
         [HttpGet]
-        public IHttpActionResult UpdateArtist(int id)
+        public IHttpActionResult FindArtist(int id)
         {
             Artist artist = db.Artists.Find(id);
+            ArtistDto artistDto = new ArtistDto()
+            {
+                ArtistID= artist.ArtistID,
+                ArtistFirstName = artist.ArtistFirstName,
+                ArtistLastName = artist.ArtistLastName,
+                ArtistOccupation = artist.ArtistOccupation,
+                ArtistEmail = artist.ArtistEmail,
+                ArtistPhoneNumber= artist.ArtistPhoneNumber,
+                ArtistDescription= artist.ArtistDescription
+            };
             if (artist == null)
             {
                 return NotFound();
             }
 
-            return Ok(artist);
+            return Ok(artistDto);
         }
 
-        // POST: api/ArtistData/UpdateArtist/5
+        // POST: api/ArtistData/UpdateArtist/3
+        //curl -d @artist.json -H "Content-type:application/json" http://localhost:49268/api/ArtistData/UpdateArtist/3
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdateArtist(int id, Artist artist)
@@ -74,6 +99,7 @@ namespace ArtistsHub.Controllers
         }
 
         // POST: api/ArtistData/AddArtist
+        //curl -d @artist.json -H "Content-type:application/json" http://localhost:49268/api/ArtistData/AddArtist
         [ResponseType(typeof(Artist))]
         [HttpPost]
         public IHttpActionResult AddArtist(Artist artist)
@@ -89,7 +115,8 @@ namespace ArtistsHub.Controllers
             return CreatedAtRoute("DefaultApi", new { id = artist.ArtistID }, artist);
         }
 
-        // POST: api/ArtistData/DeleteArtist/5
+        // POST: api/ArtistData/DeleteArtist/3
+        // curl - d "" http://localhost:49268/api/ArtistData/DeleteArtist/3
         [ResponseType(typeof(Artist))]
         [HttpPost]
         public IHttpActionResult DeleteArtist(int id)

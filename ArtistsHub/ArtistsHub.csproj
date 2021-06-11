@@ -225,6 +225,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="JSON\artform.json" />
+    <None Include="JSON\discipline.json" />
+    <None Include="JSON\artist.json" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />

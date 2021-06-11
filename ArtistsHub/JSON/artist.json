@@ -1,0 +1,9 @@
+﻿{
+"ArtistID":3,
+ "ArtistFirstName":"Tom",
+"ArtistLastName": "Cruse",
+"ArtistOccupation": "Actor",
+"ArtistPhoneNumber":"9087645321",
+"ArtistEmail":"tom@yahoo.com",
+"ArtistDescription":"Hope you are enjoying."
+}

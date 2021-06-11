@@ -37,7 +37,8 @@ namespace ArtistsHub.Controllers
             return Ok(discipline);
         }
 
-        // POST: api/DisciplineData/UpdateDiscipline/5
+        // POST: api/DisciplineData/UpdateDiscipline/4
+        // curl -d @discipline.json -H "Content-type:application/json" http://localhost:49268/api/DisciplineData/Updateiscipline/4
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdateDiscipline(int id, Discipline discipline)
@@ -74,6 +75,7 @@ namespace ArtistsHub.Controllers
         }
 
         // POST: api/DisciplineData/AddDiscipline
+        // curl -d @discipline.json -H "Content-type:application/json" http://localhost:49268/api/DisciplineData/AddDiscipline
         [ResponseType(typeof(Discipline))]
         [HttpPost]
         public IHttpActionResult AddDiscipline(Discipline discipline)
@@ -90,6 +92,7 @@ namespace ArtistsHub.Controllers
         }
 
         // POST: api/DisciplineData/DeleteDiscipline/5
+       //curl -d ""http://localhost:49268/api/DisciplineData/DeleteDiscipline/3
         [ResponseType(typeof(Discipline))]
         [HttpPost]
         public IHttpActionResult DeleteDiscipline(int id)
@@ -103,7 +106,7 @@ namespace ArtistsHub.Controllers
             db.Disciplines.Remove(discipline);
             db.SaveChanges();
 
-            return Ok(discipline);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
