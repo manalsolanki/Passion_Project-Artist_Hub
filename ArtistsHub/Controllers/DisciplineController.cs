@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Web.Script.Serialization;
 using ArtistsHub.Models;
+using System.Diagnostics;
 
 namespace ArtistsHub.Controllers
 {
@@ -25,9 +26,9 @@ namespace ArtistsHub.Controllers
             // Objective: Commmunicate with our Discipline data api  to retrive a list of all disciplines.
             // curl http://localhost:49268/api/DisciplineData/ListDiscipline
 
-            string url = "DisciplineData/ListDiscipline";
+            string url = "DisciplineData/ListDisciplines";
             HttpResponseMessage response = client.GetAsync(url).Result;
-
+            Debug.WriteLine(response);
             IEnumerable<DisciplineDto> disciplines = response.Content.ReadAsAsync<IEnumerable<DisciplineDto>>().Result;
             return View(disciplines);
         }
@@ -41,73 +42,103 @@ namespace ArtistsHub.Controllers
             string url = "DisciplineData/FindDiscipline/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            Discipline selectedDiscipline = response.Content.ReadAsAsync<Discipline>().Result;
+            DisciplineDto selectedDiscipline = response.Content.ReadAsAsync<DisciplineDto>().Result;
             return View(selectedDiscipline);
         }
+        //GET: Discipline/Error
+        public ActionResult Error()
+        {
+            return View();
+        }
 
-        // GET: Discipline/Create
-        public ActionResult Create()
+        // GET: Discipline/New
+        public ActionResult New()
         {
             return View();
         }
 
         // POST: Discipline/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Discipline discipline)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            string url = "disciplinedata/addDiscipline";
+            //objective: add a new artform into the system using the API
+            //curl - d @artform.json - H "Content-type:application/json" http://localhost:49268/api/ArtFormData/AddArtForm            string url = "artformdata/addArtForm";
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string jsonpayload = jss.Serialize(discipline);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 
-        // GET: Discipline/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Discipline/Update/5
+        public ActionResult Update(int id)
         {
-            return View();
+            string url = "DisciplineData/FindDiscipline/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            DisciplineDto selectedDiscipline = response.Content.ReadAsAsync<DisciplineDto>().Result;
+            return View(selectedDiscipline);
         }
 
         // POST: Discipline/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Discipline discipline)
         {
-            try
+            string url = "disciplineData/UpdateDiscipline/" + id;
+            discipline.DisciplineID = id;
+            string jsonpayload = jss.Serialize(discipline);
+            //Debug.WriteLine(jsonpayload);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+           
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(response);
+            if (response.IsSuccessStatusCode)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
-            catch
+            else
             {
-                return View();
+                return RedirectToAction("Error");
             }
         }
 
-        // GET: Discipline/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Discipline/DeleteConfirmation/5
+        public ActionResult DeleteConfirmation(int id)
         {
-            return View();
+            string url = "DisciplineData/FindDiscipline/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            DisciplineDto selectedDiscipline = response.Content.ReadAsAsync<DisciplineDto>().Result;
+            return View(selectedDiscipline);
         }
 
         // POST: Discipline/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
+            string url = "disciplinedata/deleteDiscipline/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
-            catch
+            else
             {
-                return View();
+                return RedirectToAction("Error");
             }
         }
     }

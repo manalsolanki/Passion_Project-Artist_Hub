@@ -1,0 +1,14 @@
+﻿@model ArtistsHub.Models.DisciplineDto
+@{
+    ViewBag.Title = "DeleteConfirmation";
+}
+
+<h2>DeleteConfirmation</h2>
+
+
+<h3>@Model.DisciplineName</h3>
+<p>Discipline Description :  @Model.DisciplineDescription</p>
+
+<form action="/discipline/delete/@Model.DisciplineID" method="post">
+    <input type="submit" value="Delete"/>
+</form>

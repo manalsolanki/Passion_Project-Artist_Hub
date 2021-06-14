@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+<h2>Create a New Discipline</h2>
+
+<form action="/Discipline/Create" method="POST">
+    <div>
+        <label>Art Form Name:</label> <input type="text" name="DisciplineName" />
+    </div>
+    <div>
+        <label>Discipline Descriptiom</label> <input type="text" name="DisciplineDescription" />
+    </div>
+
+    <div style="padding:1em;">
+        <input type="submit" value="Add Art Form" />
+
+    </div>
+</form>

@@ -84,7 +84,7 @@ namespace ArtistsHub.Controllers
         }
 
         // GET: ArtForm/Update/5
-        public ActionResult Edit(int id)
+        public ActionResult Update(int id)
         {
             // Objective: Commmunicate with the Artform data api  to retrive a specific art form with id.
             // curl http://localhost:49268/api/ArtFormData/FindArtForm/{id}
@@ -101,6 +101,7 @@ namespace ArtistsHub.Controllers
         public ActionResult Edit(int id, ArtForm artForm)
         {
             string url = "artformdata/UpdateArtForm/" + id;
+            artForm.ArtFormID = id;
             string jsonpayload = jss.Serialize(artForm);
             Debug.WriteLine(jsonpayload);
             HttpContent content = new StringContent(jsonpayload);
@@ -118,25 +119,30 @@ namespace ArtistsHub.Controllers
             }
         }
 
-        // GET: ArtForm/Delete/5
-        public ActionResult Delete(int id)
+        // GET: ArtForm/DeleteConfirmation/5
+        public ActionResult DeleteConfirmation(int id)
         {
-            return View();
+            string url = "artformdata/findartform/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            ArtFormDto selectedArtForm = response.Content.ReadAsAsync<ArtFormDto>().Result;
+            return View(selectedArtForm);
         }
 
         // POST: ArtForm/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
+            string url = "artformdata/deleteArtForm/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
-            catch
+            else
             {
-                return View();
+                return RedirectToAction("Error");
             }
         }
     }

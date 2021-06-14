@@ -282,7 +282,13 @@
     <Content Include="Views\ArtForm\New.cshtml" />
     <Content Include="Views\ArtForm\Error.cshtml" />
     <Content Include="Views\Discipline\List.cshtml" />
-    <Content Include="Views\ArtForm\Edit.cshtml" />
+    <Content Include="Views\ArtForm\Update.cshtml" />
+    <Content Include="Views\Discipline\Details.cshtml" />
+    <Content Include="Views\ArtForm\DeleteConfirmation.cshtml" />
+    <Content Include="Views\Discipline\Update.cshtml" />
+    <Content Include="Views\Discipline\Error.cshtml" />
+    <Content Include="Views\Discipline\New.cshtml" />
+    <Content Include="Views\Discipline\DeleteConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,13 +1,13 @@
-﻿@model IEnumerable<ArtistsHub.Models.Discipline>
+﻿@model IEnumerable<ArtistsHub.Models.DisciplineDto>
 
 @{
     ViewBag.Title = "List";
 }
-<h5><a href="/ArtForm/New">Add new Art forms</a></h5>
+<h5><a href="/Discipline/New">Add new Art forms</a></h5>
 <h2>List of Categories</h2>
 <ul>
     @foreach (var discipline in Model)
     {
-        <li><a href="/ArtForm/Details/@discipline.DisciplineID">@discipline.DisciplineName</a></li>
+        <li><a href="/discipline/Details/@discipline.DisciplineID">@discipline.DisciplineName</a></li>
     }
 </ul>

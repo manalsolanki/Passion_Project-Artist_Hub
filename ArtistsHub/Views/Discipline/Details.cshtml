@@ -1,0 +1,15 @@
+﻿
+@model ArtistsHub.Models.DisciplineDto
+@{
+    ViewBag.Title = "Details";
+}
+<h4><a href="/discipline/list">Go back to list</a></h4>
+
+<h4><a href="/discipline/update/@Model.DisciplineID">Update this.</a></h4>
+
+<h4><a href="/discipline/deleteConfirmation/@Model.DisciplineID">Delete this.</a></h4>
+<h2>Details</h2>
+
+<h3>@Model.DisciplineName</h3>
+<p>Discipline Description :  @Model.DisciplineDescription</p>
+

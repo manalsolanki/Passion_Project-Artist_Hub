@@ -1,0 +1,13 @@
+﻿@model ArtistsHub.Models.ArtFormDto
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>@Model.ArtFormName</h3>
+<p>Discipline Name :  @Model.DisciplineName</p>
+<form method="post" action="/artform/delete/@Model.ArtFormID">
+        <input type="submit" value="Delete" />
+</form>
+
