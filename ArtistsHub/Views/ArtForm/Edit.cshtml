@@ -1,0 +1,20 @@
+﻿@model ArtistsHub.Models.ArtFormDto
+@{
+    ViewBag.Title = "Edit";
+}
+<h4><a href="/artform/list">Go back to list</a></h4>
+
+<form action="/ArtForm/edit/@Model.ArtFormID" method="POST">
+    <div>
+        <label>Art Form Name:</label> <input type="text" name="ArtFormName" value="@Model.ArtFormName" />
+    </div>
+    <div>
+        <label>Discipline Id:</label> <input type="number" name="DisciplineID" value="" />
+    </div>
+
+    <div style="padding:1em;">
+        <input type="submit" value="Update Art Form" />
+
+    </div>
+</form>
+

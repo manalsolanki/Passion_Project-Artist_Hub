@@ -18,23 +18,38 @@ namespace ArtistsHub.Controllers
 
         // GET: api/DisciplineData/ListDisciplines
         [HttpGet]
-        public IQueryable<Discipline> ListDisciplines()
+        public IEnumerable<DisciplineDto> ListDisciplines()
         {
-            return db.Disciplines;
+            List<Discipline> disciplines = db.Disciplines.ToList();
+            List<DisciplineDto> disciplineDtos = new List<DisciplineDto>();
+            disciplines.ForEach(element => disciplineDtos.Add(new DisciplineDto()
+            {
+                DisciplineID= element.DisciplineID,
+                DisciplineName=element.DisciplineName,
+                DisciplineDescription = element.DisciplineDescription
+            }));
+            return disciplineDtos;
         }
 
-        // GET: api/DisciplineData/FindDisciplines/5
+        // GET: api/DisciplineData/FindDiscipline/5
         [ResponseType(typeof(Discipline))]
         [HttpGet]
         public IHttpActionResult FindDiscipline(int id)
         {
             Discipline discipline = db.Disciplines.Find(id);
+            DisciplineDto disciplineDto = new DisciplineDto()
+            {
+                DisciplineID = discipline.DisciplineID,
+                DisciplineName = discipline.DisciplineName,
+                DisciplineDescription = discipline.DisciplineName
+            };
+
             if (discipline == null)
             {
                 return NotFound();
             }
 
-            return Ok(discipline);
+            return Ok(disciplineDto);
         }
 
         // POST: api/DisciplineData/UpdateDiscipline/4

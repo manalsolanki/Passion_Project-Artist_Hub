@@ -1,0 +1,13 @@
+﻿@model IEnumerable<ArtistsHub.Models.Discipline>
+
+@{
+    ViewBag.Title = "List";
+}
+<h5><a href="/ArtForm/New">Add new Art forms</a></h5>
+<h2>List of Categories</h2>
+<ul>
+    @foreach (var discipline in Model)
+    {
+        <li><a href="/ArtForm/Details/@discipline.DisciplineID">@discipline.DisciplineName</a></li>
+    }
+</ul>

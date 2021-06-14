@@ -83,25 +83,38 @@ namespace ArtistsHub.Controllers
             }
         }
 
-        // GET: ArtForm/Edit/5
+        // GET: ArtForm/Update/5
         public ActionResult Edit(int id)
         {
-            return View();
+            // Objective: Commmunicate with the Artform data api  to retrive a specific art form with id.
+            // curl http://localhost:49268/api/ArtFormData/FindArtForm/{id}
+
+            string url = "artformdata/findartform/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            ArtFormDto selectedArtForm = response.Content.ReadAsAsync<ArtFormDto>().Result;
+            return View(selectedArtForm);
         }
 
         // POST: ArtForm/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, ArtForm artForm)
         {
-            try
-            {
-                // TODO: Add update logic here
+            string url = "artformdata/UpdateArtForm/" + id;
+            string jsonpayload = jss.Serialize(artForm);
+            Debug.WriteLine(jsonpayload);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
 
-                return RedirectToAction("Index");
-            }
-            catch
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(content);
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 

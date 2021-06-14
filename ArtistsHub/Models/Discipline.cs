@@ -17,4 +17,12 @@ namespace ArtistsHub.Models
 
 
     }
+    public class DisciplineDto
+    {
+        public int DisciplineID { get; set; }
+
+        public string DisciplineName { get; set; }
+
+        public string DisciplineDescription { get; set; }
+    }
 }
