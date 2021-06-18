@@ -62,9 +62,8 @@ namespace ArtistsHub.Controllers
         public ActionResult Create(Discipline discipline)
         {
             string url = "disciplinedata/addDiscipline";
-            //objective: add a new artform into the system using the API
-            //curl - d @artform.json - H "Content-type:application/json" http://localhost:49268/api/ArtFormData/AddArtForm            string url = "artformdata/addArtForm";
-
+            //objective: add a new  into the system using the API
+            //curl - d @artform.json - H "Content-type:application/json" http://localhost:49268/api/disciplinedata/addDiscipline           
             string jsonpayload = jss.Serialize(discipline);
 
             HttpContent content = new StringContent(jsonpayload);
@@ -84,6 +83,9 @@ namespace ArtistsHub.Controllers
         // GET: Discipline/Update/5
         public ActionResult Update(int id)
         {
+            // Objective : To find the discipline with mentioned id.
+            // curl http://localhost:49268/api/DisciplineData/FindDiscipline/{id}
+
             string url = "DisciplineData/FindDiscipline/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
@@ -95,10 +97,15 @@ namespace ArtistsHub.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Discipline discipline)
         {
+            // Objective : Edit the information of mentioned id.
+           // curl -d @discipline.json -H "Content-type:application/json" http://localhost:49268/api/DisciplineData/Updateiscipline/4
+
             string url = "disciplineData/UpdateDiscipline/" + id;
             discipline.DisciplineID = id;
             string jsonpayload = jss.Serialize(discipline);
             //Debug.WriteLine(jsonpayload);
+            // To do 
+            // This is not working yet , not able to update the data.
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
            
@@ -117,6 +124,9 @@ namespace ArtistsHub.Controllers
         // GET: Discipline/DeleteConfirmation/5
         public ActionResult DeleteConfirmation(int id)
         {
+            //Objective : Find by specific id , which discipline is to be deleted.
+            // curl http://localhost:49268/api/DisciplineData/FindDiscipline/{id}
+
             string url = "DisciplineData/FindDiscipline/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
@@ -128,6 +138,9 @@ namespace ArtistsHub.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
+            // Objective : Deleted the enitity of id mentioned.
+            //curl -d ""http://localhost:49268/api/DisciplineData/DeleteDiscipline/3
+
             string url = "disciplinedata/deleteDiscipline/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";

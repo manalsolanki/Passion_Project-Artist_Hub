@@ -1,0 +1,18 @@
+﻿@model ArtistsHub.Models.ArtistDto
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4><a href="/artist/list">Go back to list</a></h4>
+
+
+<h4><a href="/artist/update/@Model.ArtistID">Update this.</a></h4>
+
+<h4><a href="/artform/deleteConfirmation/@Model.ArtistID">Delete this.</a></h4>
+<h2>Details</h2>
+
+<h3>@Model.ArtistFirstName @Model.ArtistLastName</h3>
+<h4>Ocupation : @Model.ArtistOccupation</h4>
+<p>Description : @Model.ArtistDescription</p>
+<p>Phone Number : @Model.ArtistPhoneNumber</p>
+<p>Email : @Model.ArtistEmail</p>

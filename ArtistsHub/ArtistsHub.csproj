@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArtFormController.cs" />
     <Compile Include="Controllers\ArtFormDataController.cs" />
+    <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\ArtistDataController.cs" />
     <Compile Include="Controllers\DisciplineController.cs" />
     <Compile Include="Controllers\DisciplineDataController.cs" />
@@ -289,6 +290,8 @@
     <Content Include="Views\Discipline\Error.cshtml" />
     <Content Include="Views\Discipline\New.cshtml" />
     <Content Include="Views\Discipline\DeleteConfirmation.cshtml" />
+    <Content Include="Views\Artist\List.cshtml" />
+    <Content Include="Views\Artist\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
