@@ -292,6 +292,9 @@
     <Content Include="Views\Discipline\DeleteConfirmation.cshtml" />
     <Content Include="Views\Artist\List.cshtml" />
     <Content Include="Views\Artist\Details.cshtml" />
+    <Content Include="Views\Artist\New.cshtml" />
+    <Content Include="Views\Artist\Update.cshtml" />
+    <Content Include="Views\Artist\DeleteConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

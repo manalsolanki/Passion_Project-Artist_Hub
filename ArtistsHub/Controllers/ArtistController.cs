@@ -45,69 +45,112 @@ namespace ArtistsHub.Controllers
             return View(selectedArtist);
         }
 
-        // GET: Artist/Create
-        public ActionResult Create()
+        //GET: ArtForm/Error
+        public ActionResult Error()
+        {
+            return View();
+        }
+
+        // GET: Artist/New
+        public ActionResult New()
         {
             return View();
         }
 
         // POST: Artist/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Artist artist)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            string url = "artistdata/addArtist";
+            //objective: Communicate with artist data controller to add a new artist.
+            //curl - d @artform.json - H "Content-type:application/json" http://localhost:49268/api/ArtistData/AddArtist            string url = "artformdata/addArtForm";
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string jsonpayload = jss.Serialize(artist);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 
-        // GET: Artist/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Artist/Update/5
+        public ActionResult Update(int id)
         {
-            return View();
+            // Objective: Commmunicate with the Artist data api  to retrive a specific artist form with id.
+            // curl http://localhost:49268/api/ArtistData/FindArtist/{id}
+
+            string url = "artistdata/findartist/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            ArtistDto selectedArtist = response.Content.ReadAsAsync<ArtistDto>().Result;
+            return View(selectedArtist);
         }
 
         // POST: Artist/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Artist artist)
         {
-            try
-            {
-                // TODO: Add update logic here
+            // objective : Communicate with the artist controller to update the artist having specific id.
+            //curl -d @artist.json -H "Content-type:application/json" http://localhost:49268/api/ArtistData/UpdateArtist/3
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string url = "artistdata/UpdateArtist/" + id;
+            artist.ArtistID = id;
+            string jsonpayload = jss.Serialize(artist);
+            Debug.WriteLine(jsonpayload);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(content);
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 
-        // GET: Artist/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Artist/DeleteConfirmation/5
+        public ActionResult DeleteConfirmation(int id)
         {
-            return View();
+            // Objective: Commmunicate with the Artist data api  to retrive a specific artist form with id.
+            // curl http://localhost:49268/api/ArtistData/FindArtist/{id}
+
+            string url = "artistdata/findartist/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            ArtistDto selectedArtist = response.Content.ReadAsAsync<ArtistDto>().Result;
+            return View(selectedArtist);
         }
 
         // POST: Artist/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            // Objective : Connects with artist wb spi to delete a artist with {id}.
+            // curl - d "" http://localhost:49268/api/ArtistData/DeleteArtist/3
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string url = "artistdata/deleteArtist/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
     }

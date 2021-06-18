@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Create a Artist</h2>
+
+<form action="/Artist/Create" method="POST">
+    <div>
+        <label>Artist First Name:</label> <input type="text" name="ArtistFirstName" />
+    </div>
+    <div>
+        <label>Artist Last Name:</label> <input type="text" name="ArtistLastName" />
+    </div>
+    <div>
+        <label>Artist Occupation:</label> <input type="text" name="ArtistOccupation" />
+    </div>
+    <div>
+        <label>Artist Phone No.:</label> <input type="text" name="ArtistPhoneNumber" />
+    </div>
+    <div>
+        <label>Artist Email:</label> <input type="email" name="ArtistEmail" />
+    </div>
+    <div>
+        <label>Artist Description:</label> <input type="text" name="ArtistDescription" />
+    </div>
+
+
+    <div style="padding:1em;">
+        <input type="submit" value="Add an artist" />
+
+    </div>
+</form>
+
+
+

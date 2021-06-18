@@ -1,0 +1,34 @@
+﻿@model ArtistsHub.Models.ArtistDto
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update</h2>
+<form action="/Artist/Edit/@Model.ArtistID" method="POST">
+    <div>
+        <label>Artist First Name:</label> <input type="text" name="ArtistFirstName" value="@Model.ArtistFirstName" />
+    </div>
+    <div>
+        <label>Artist Last Name:</label> <input type="text" name="ArtistLastName" value="@Model.ArtistLastName"/>
+    </div>
+    <div>
+        <label>Artist Occupation:</label> <input type="text" name="ArtistOccupation" value="@Model.ArtistOccupation" />
+    </div>
+    <div>
+        <label>Artist Phone No.:</label> <input type="text" name="ArtistPhoneNumber" value="@Model.ArtistPhoneNumber" />
+    </div>
+    <div>
+        <label>Artist Email:</label> <input type="email" name="ArtistEmail" value="@Model.ArtistEmail"/>
+    </div>
+    <div>
+        <label>Artist Description:</label> <input type="text" name="ArtistDescription" value="@Model.ArtistDescription" />
+    </div>
+
+
+    <div style="padding:1em;">
+        <input type="submit" value="Update an artist" />
+
+    </div>
+</form>
+
+

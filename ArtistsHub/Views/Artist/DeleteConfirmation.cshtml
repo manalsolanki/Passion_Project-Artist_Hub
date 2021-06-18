@@ -1,0 +1,13 @@
+﻿@model ArtistsHub.Models.ArtistDto
+@{
+    ViewBag.Title = "DeleteConfirmation";
+}
+
+<h2>DeleteConfirmation</h2>
+<h3>@Model.ArtistFirstName @Model.ArtistLastName</h3>
+<p>Description : @Model.ArtistDescription</p>
+<p>Phone Number : @Model.ArtistPhoneNumber</p>
+<p>Email : @Model.ArtistEmail</p>
+<form method="post" action="/artist/delete/@Model.ArtistID">
+    <input type="submit" value="Delete" />
+</form>

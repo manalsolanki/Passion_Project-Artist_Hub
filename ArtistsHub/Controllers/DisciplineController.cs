@@ -106,6 +106,7 @@ namespace ArtistsHub.Controllers
             //Debug.WriteLine(jsonpayload);
             // To do 
             // This is not working yet , not able to update the data.
+            // Can update the discipline name but discipline description is not being updated.
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
            
