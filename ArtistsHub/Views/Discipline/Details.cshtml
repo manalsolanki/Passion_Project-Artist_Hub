@@ -1,15 +1,21 @@
 ﻿
-@model ArtistsHub.Models.DisciplineDto
+@model ArtistsHub.Models.ViewModel.DetailDiscipline
 @{
     ViewBag.Title = "Details";
 }
 <h4><a href="/discipline/list">Go back to list</a></h4>
 
-<h4><a href="/discipline/update/@Model.DisciplineID">Update this.</a></h4>
+<h4><a href="/discipline/update/@Model.SelectedDiscipline.DisciplineID">Update this.</a></h4>
 
-<h4><a href="/discipline/deleteConfirmation/@Model.DisciplineID">Delete this.</a></h4>
+<h4><a href="/discipline/deleteConfirmation/@Model.SelectedDiscipline.DisciplineID">Delete this.</a></h4>
 <h2>Details</h2>
 
-<h3>@Model.DisciplineName</h3>
-<p>Discipline Description :  @Model.DisciplineDescription</p>
-
+<h3>@Model.SelectedDiscipline.DisciplineName</h3>
+<p>Discipline Description :  @Model.SelectedDiscipline.DisciplineDescription</p>
+<h2>Related ArtForms</h2>
+<ul>
+    @foreach (var artform in Model.RelatedArtForm)
+    {
+    <li><a href="/artForm/details/@artform.ArtFormID">@artform.ArtFormName</a></li>
+    }
+</ul>

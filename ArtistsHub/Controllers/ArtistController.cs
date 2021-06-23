@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Web.Script.Serialization;
 using ArtistsHub.Models;
+using ArtistsHub.Models.ViewModel;
 using System.Diagnostics;
 
 namespace ArtistsHub.Controllers
@@ -35,6 +36,7 @@ namespace ArtistsHub.Controllers
         // GET: Artist/Details/5
         public ActionResult Details(int id)
         {
+            DetailArtist viewModel = new DetailArtist();
             // Objective: Commmunicate with the Artist data api  to retrive a specific artist form with id.
             // curl http://localhost:49268/api/ArtistData/FindArtist/{id}
 
@@ -42,7 +44,15 @@ namespace ArtistsHub.Controllers
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             ArtistDto selectedArtist = response.Content.ReadAsAsync<ArtistDto>().Result;
-            return View(selectedArtist);
+            viewModel.selectedArtist = selectedArtist;
+
+            // Get all the art forms related to this artist.
+            url = "ArtFormData/ListArtFormsForArtist" + id;
+            response = client.GetAsync(url).Result;
+
+            IEnumerable<ArtFormDto> relatedArtForms = response.Content.ReadAsAsync<IEnumerable<ArtFormDto>>().Result;
+            viewModel.relatedArtForms = relatedArtForms;
+            return View(viewModel);
         }
 
         //GET: ArtForm/Error

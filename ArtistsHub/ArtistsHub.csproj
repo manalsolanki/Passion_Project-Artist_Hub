@@ -215,6 +215,9 @@
     <Compile Include="Models\Discipline.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModel\DetailArtist.cs" />
+    <Compile Include="Models\ViewModel\DetailDiscipline.cs" />
+    <Compile Include="Models\ViewModel\UpdateArtForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

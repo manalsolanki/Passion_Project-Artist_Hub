@@ -1,4 +1,4 @@
-﻿@model ArtistsHub.Models.ArtistDto
+﻿@model ArtistsHub.Models.ViewModel.DetailArtist
 @{
     ViewBag.Title = "Details";
 }
@@ -6,13 +6,21 @@
 <h4><a href="/artist/list">Go back to list</a></h4>
 
 
-<h4><a href="/artist/update/@Model.ArtistID">Update this.</a></h4>
+<h4><a href="/artist/update/@Model.selectedArtist.ArtistID">Update this.</a></h4>
 
-<h4><a href="/artist/deleteConfirmation/@Model.ArtistID">Delete this.</a></h4>
+<h4><a href="/artist/deleteConfirmation/@Model.selectedArtist.ArtistID">Delete this.</a></h4>
 <h2>Details</h2>
 
-<h3>@Model.ArtistFirstName @Model.ArtistLastName</h3>
-<h4>Ocupation : @Model.ArtistOccupation</h4>
-<p>Description : @Model.ArtistDescription</p>
-<p>Phone Number : @Model.ArtistPhoneNumber</p>
-<p>Email : @Model.ArtistEmail</p>
+<h3>@Model.selectedArtist.ArtistFirstName @Model.selectedArtist.ArtistLastName</h3>
+<h4>Ocupation : @Model.selectedArtist.ArtistOccupation</h4>
+<p>Description : @Model.selectedArtist.ArtistDescription</p>
+<p>Phone Number : @Model.selectedArtist.ArtistPhoneNumber</p>
+<p>Email : @Model.selectedArtist.ArtistEmail</p>
+
+<h4>Art Forms</h4>
+<ul>
+    @foreach(var artform in Model.relatedArtForms)
+    {
+        <li><a href="/artform/details/@artform.ArtFormID">@artform.ArtFormName</a></li>
+    }
+</ul>

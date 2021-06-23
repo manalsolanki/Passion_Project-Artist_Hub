@@ -1,16 +1,30 @@
-﻿@model ArtistsHub.Models.ArtFormDto
+﻿@model ArtistsHub.Models.ViewModel.UpdateArtForm
 @{
     ViewBag.Title = "Update";
 }
 <h4><a href="/artform/list">Go back to list</a></h4>
 
 
-<form action="/ArtForm/edit/@Model.ArtFormID" method="POST">
+<form action="/ArtForm/edit/@Model.SelectedArtForm.ArtFormID" method="POST">
     <div>
-        <label>Art Form Name:</label> <input type="text" name="ArtFormName" value="@Model.ArtFormName" />
+        <label>Art Form Name:</label> <input type="text" name="ArtFormName" value="@Model.SelectedArtForm.ArtFormName" />
     </div>
     <div>
-        <label>Discipline Id:</label> <input type="number" name="DisciplineID" value="" />
+        <label>Discipline Id:</label>
+        <select name="DisciplineID">
+            @foreach(var discipline in Model.DisciplinesOptions)
+            {
+                string selected = "";
+                if (discipline.DisciplineID == Model.SelectedArtForm.DisciplineId)
+                {
+                    selected = "selected";
+                }
+                <option value="@discipline.DisciplineID" @selected>@discipline.DisciplineName</option>
+
+            }
+            
+        </select>
+        <input type="number" name="DisciplineID" value="" />
     </div>
 
     <div style="padding:1em;">

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Web.Script.Serialization;
 using ArtistsHub.Models;
+using ArtistsHub.Models.ViewModel;
 using System.Diagnostics;
 
 namespace ArtistsHub.Controllers
@@ -36,6 +37,7 @@ namespace ArtistsHub.Controllers
         // GET: Discipline/Details/5
         public ActionResult Details(int id)
         {
+            DetailDiscipline viewModel = new DetailDiscipline();
             // Objective: Commmunicate with the Discipline data api  to retrive a specific discipline with id.
             // curl http://localhost:49268/api/DisciplineData/FindDiscipline/{id}
 
@@ -43,7 +45,16 @@ namespace ArtistsHub.Controllers
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             DisciplineDto selectedDiscipline = response.Content.ReadAsAsync<DisciplineDto>().Result;
-            return View(selectedDiscipline);
+            viewModel.SelectedDiscipline = selectedDiscipline;
+
+            //To show the artforms related to this discipline Id
+            //  GET: api/ArtFormData/ListArtFormsForDisciplines/3
+            url = "ArtFormData/ListArtFormsForDisciplines/" + id;
+            response= client.GetAsync(url).Result;
+
+            IEnumerable<ArtFormDto> relatedArtForms = response.Content.ReadAsAsync < IEnumerable<ArtFormDto>>().Result;
+            viewModel.RelatedArtForm = relatedArtForms;
+            return View(viewModel);
         }
         //GET: Discipline/Error
         public ActionResult Error()

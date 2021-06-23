@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Diagnostics;
 using ArtistsHub.Models;
+using ArtistsHub.Models.ViewModel;
 using System.Web.Script.Serialization;
 
 
@@ -56,7 +57,16 @@ namespace ArtistsHub.Controllers
         // GET: ArtForm/New
         public ActionResult New()
         {
-            return View();
+
+            //information about all discipline 
+            //GET api/disciplinedata/listdisciplines
+
+            string url = "disciplinedata/listdisciplines";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<DisciplineDto> DisciplineOptions = response.Content.ReadAsAsync<IEnumerable<DisciplineDto>>().Result;
+
+            return View(DisciplineOptions);
+           
         }
 
         // POST: ArtForm/Create
@@ -86,6 +96,8 @@ namespace ArtistsHub.Controllers
         // GET: ArtForm/Update/5
         public ActionResult Update(int id)
         {
+            UpdateArtForm viewModel = new UpdateArtForm();
+
             // Objective: Commmunicate with the Artform data api  to retrive a specific art form with id.
             // curl http://localhost:49268/api/ArtFormData/FindArtForm/{id}
 
@@ -93,7 +105,19 @@ namespace ArtistsHub.Controllers
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             ArtFormDto selectedArtForm = response.Content.ReadAsAsync<ArtFormDto>().Result;
-            return View(selectedArtForm);
+            viewModel.SelectedArtForm = selectedArtForm;
+
+            //information about all discipline 
+            //GET api/disciplinedata/listdisciplines
+
+            url = "disciplinedata/listdisciplines";
+            response = client.GetAsync(url).Result;
+            IEnumerable<DisciplineDto> DisciplineOptions = response.Content.ReadAsAsync<IEnumerable<DisciplineDto>>().Result;
+
+            viewModel.DisciplinesOptions= DisciplineOptions;
+
+
+            return View(viewModel);
         }
 
         // POST: ArtForm/Edit/5

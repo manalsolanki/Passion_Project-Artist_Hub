@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<ArtistsHub.Models.DisciplineDto>
 @{
     ViewBag.Title = "New";
 }
@@ -10,7 +10,13 @@
         <label>Art Form Name:</label> <input type="text" name="ArtFormName" />
     </div>
     <div>
-        <label>Discipline Id:</label> <input type="number" name="DisciplineID" />
+        <label>Discipline Id:</label> 
+        <select name="DisciplineID">
+            @foreach(var discipline in Model)
+            {
+                <option value="@discipline.DisciplineID">@discipline.DisciplineName</option>
+            }
+        </select>
     </div>
   
     <div style="padding:1em;">

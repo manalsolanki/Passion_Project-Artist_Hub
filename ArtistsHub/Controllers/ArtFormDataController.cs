@@ -26,6 +26,7 @@ namespace ArtistsHub.Controllers
             {
                 ArtFormID = element.ArtFormID,
                 ArtFormName = element.ArtFormName,
+                DisciplineId = element.DisciplineID,
                 DisciplineName = element.Discipline.DisciplineName
             }));
             return artFormDtos;
@@ -41,6 +42,7 @@ namespace ArtistsHub.Controllers
             {
                 ArtFormID = artForm.ArtFormID,
                 ArtFormName = artForm.ArtFormName,
+                DisciplineId = artForm.DisciplineID,
                 DisciplineName = artForm.Discipline.DisciplineName
             };
             if (artForm == null)
@@ -49,6 +51,64 @@ namespace ArtistsHub.Controllers
             }
 
             return Ok(artFormDto);
+        }
+
+        /// <summary>
+        /// Gathers information about all artForms related to a particular discipline ID
+        /// </summary>
+        /// <returns>
+        /// CONTENT: all artforms in the database, including their associated discipline matched with a particular discipline ID
+        /// </returns>
+        /// <param name="id">Discipline ID.</param>
+        /// <example>
+        /// GET: api/ArtFormData/ListArtFormsForDisciplines/3
+        /// </example>
+        [HttpGet]
+        [ResponseType(typeof(ArtFormDto))]
+        public IHttpActionResult ListArtFormsForDisciplines(int id)
+        {
+            List<ArtForm> artForms = db.ArtForms.Where(a=>a.DisciplineID == id).ToList();
+            List<ArtFormDto> artFormDtos = new List<ArtFormDto>();
+            artForms.ForEach(artForm => artFormDtos.Add(new ArtFormDto()
+            {
+                ArtFormID = artForm.ArtFormID,
+                ArtFormName = artForm.ArtFormName,
+                DisciplineId = artForm.DisciplineID,
+                DisciplineName = artForm.Discipline.DisciplineName
+            }));
+            
+            return Ok(artFormDtos);
+        }
+
+
+        /// <summary>
+        /// Gathers information about all artForms related to a particular Artist
+        /// </summary>
+        /// <returns>
+        /// CONTENT: all artforms in the database, including their associated artist matched with a particular Artist ID
+        /// </returns>
+        /// <param name="id">Artist ID.</param>
+        /// <example>
+        /// GET: api/ArtFormData/ListArtFormsForArtist/3
+        /// </example>
+        [HttpGet]
+        [ResponseType(typeof(ArtFormDto))]
+        public IHttpActionResult ListArtFormsForArtist(int id)
+        {
+            List<ArtForm> artForms = db.ArtForms.Where(
+                af => af.Artists.Any(
+                    at => at.ArtistID == id 
+                    )).ToList();
+            List<ArtFormDto> artFormDtos = new List<ArtFormDto>();
+            artForms.ForEach(artForm => artFormDtos.Add(new ArtFormDto()
+            {
+                ArtFormID = artForm.ArtFormID,
+                ArtFormName = artForm.ArtFormName,
+                DisciplineId = artForm.DisciplineID,
+                DisciplineName = artForm.Discipline.DisciplineName
+            }));
+
+            return Ok(artFormDtos);
         }
 
         // POST: api/ArtFormData/UpdateArtForm/5

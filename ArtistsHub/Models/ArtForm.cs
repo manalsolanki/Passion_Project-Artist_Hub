@@ -31,6 +31,7 @@ namespace ArtistsHub.Models
         public string ArtFormName { get; set; }
 
         public string DisciplineName { get; set; }
+        public int DisciplineId { get; set; }
 
     }
 }
