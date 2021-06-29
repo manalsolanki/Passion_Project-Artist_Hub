@@ -45,15 +45,61 @@ namespace ArtistsHub.Controllers
 
             ArtistDto selectedArtist = response.Content.ReadAsAsync<ArtistDto>().Result;
             viewModel.selectedArtist = selectedArtist;
+            Debug.WriteLine(selectedArtist);
+
 
             // Get all the art forms related to this artist.
-            url = "ArtFormData/ListArtFormsForArtist" + id;
+            url = "ArtFormData/ListArtFormsForArtist/"+ id;
+            Debug.WriteLine(url);
             response = client.GetAsync(url).Result;
+            IEnumerable<ArtFormDto> artForms = response.Content.ReadAsAsync<IEnumerable<ArtFormDto>>().Result;
+            viewModel.relatedArtForms = artForms;
 
-            IEnumerable<ArtFormDto> relatedArtForms = response.Content.ReadAsAsync<IEnumerable<ArtFormDto>>().Result;
-            viewModel.relatedArtForms = relatedArtForms;
+
+            // Get all the list of artform which an atist is not interested in(Available Artforms).
+            url = "ArtFormData/ListArtFormsNotInterestedByArtist/"+id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<ArtFormDto> availableArtForms = response.Content.ReadAsAsync<IEnumerable<ArtFormDto>>().Result;
+            
+            viewModel.availableArtForms = availableArtForms;
+
+
             return View(viewModel);
         }
+
+        // POST : Artist/Associate/{artistId}
+        [HttpPost]
+        public ActionResult Associate(int id, int ArtFormId)
+        {
+            Debug.WriteLine("Associated artform" + ArtFormId);
+
+            //call our api to associate artist with artforms.
+            string url = "ArtistData/AssociateArtFormsWithArtist/" + id+"/"+ArtFormId;
+            Debug.WriteLine("URL " + url);
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(response);
+            return RedirectToAction("Details/" + id);
+        }
+
+
+
+
+        // POST :Artist/UnAssociate/{id}?ArtFormID={ArtFormID}
+        [HttpGet]
+        public ActionResult UnAssociate(int id, int ArtFormId)
+        {
+            //call our api to unassociate artist with artforms.
+            string url = "ArtistData/UnAssociateArtFormsWithArtist/" + id + "/" + ArtFormId;
+            Debug.WriteLine("URL " + url);
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(response);
+            return RedirectToAction("Details/" + id);
+        }
+
 
         //GET: ArtForm/Error
         public ActionResult Error()
@@ -106,7 +152,7 @@ namespace ArtistsHub.Controllers
 
         // POST: Artist/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Artist artist)
+        public ActionResult Edit(int id, Artist artist ,HttpPostedFileBase ProfilePic)
         {
             // objective : Communicate with the artist controller to update the artist having specific id.
             //curl -d @artist.json -H "Content-type:application/json" http://localhost:49268/api/ArtistData/UpdateArtist/3
@@ -120,8 +166,19 @@ namespace ArtistsHub.Controllers
 
             HttpResponseMessage response = client.PostAsync(url, content).Result;
             Debug.WriteLine(content);
-            if (response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode && ProfilePic != null)
             {
+                //Updating the profile picture as a separate request
+                Debug.WriteLine("Calling Update Image method.");
+                //Send over image data for artist
+                url = "ArtistData/UploadArtistPic/" + id;
+                //Debug.WriteLine("Received Animal Picture "+AnimalPic.FileName);
+
+                MultipartFormDataContent requestcontent = new MultipartFormDataContent();
+                HttpContent imagecontent = new StreamContent(ProfilePic.InputStream);
+                requestcontent.Add(imagecontent, "artistProfilePic", ProfilePic.FileName);
+                response = client.PostAsync(url, requestcontent).Result;
+
                 return RedirectToAction("List");
             }
             else

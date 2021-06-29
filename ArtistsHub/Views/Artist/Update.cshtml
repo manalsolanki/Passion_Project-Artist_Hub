@@ -4,7 +4,7 @@
 }
 
 <h2>Update</h2>
-<form action="/Artist/Edit/@Model.ArtistID" method="POST">
+<form action="/Artist/Edit/@Model.ArtistID" method="POST" enctype = "multipart/form-data">
     <div>
         <label>Artist First Name:</label> <input type="text" name="ArtistFirstName" value="@Model.ArtistFirstName" />
     </div>
@@ -23,7 +23,9 @@
     <div>
         <label>Artist Description:</label> <input type="text" name="ArtistDescription" value="@Model.ArtistDescription" />
     </div>
-
+    <div>
+        <input type="file" name="ProfilePic" />
+    </div>
 
     <div style="padding:1em;">
         <input type="submit" value="Update an artist" />

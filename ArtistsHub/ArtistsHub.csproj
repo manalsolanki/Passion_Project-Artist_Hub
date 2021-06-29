@@ -208,6 +208,10 @@
     <Compile Include="Migrations\202106100426581_artist-artForms.Designer.cs">
       <DependentUpon>202106100426581_artist-artForms.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106291243047_ArtistProfilePic.cs" />
+    <Compile Include="Migrations\202106291243047_ArtistProfilePic.Designer.cs">
+      <DependentUpon>202106291243047_ArtistProfilePic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ArtForm.cs" />
@@ -215,6 +219,7 @@
     <Compile Include="Models\Discipline.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModel\DetailArtForm.cs" />
     <Compile Include="Models\ViewModel\DetailArtist.cs" />
     <Compile Include="Models\ViewModel\DetailDiscipline.cs" />
     <Compile Include="Models\ViewModel\UpdateArtForm.cs" />
@@ -301,6 +306,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\Artists\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -327,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106100426581_artist-artForms.resx">
       <DependentUpon>202106100426581_artist-artForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106291243047_ArtistProfilePic.resx">
+      <DependentUpon>202106291243047_ArtistProfilePic.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

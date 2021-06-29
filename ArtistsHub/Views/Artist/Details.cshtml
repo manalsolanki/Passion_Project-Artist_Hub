@@ -16,11 +16,35 @@
 <p>Description : @Model.selectedArtist.ArtistDescription</p>
 <p>Phone Number : @Model.selectedArtist.ArtistPhoneNumber</p>
 <p>Email : @Model.selectedArtist.ArtistEmail</p>
+@{
+    string imageurl = "/Content/Images/Artists/default.jpg";
+    if (Model.selectedArtist.ArtistHasProfilePic)
+    {
+        imageurl = "/Content/Images/Artists/" + Model.selectedArtist.ArtistID+ "." + Model.selectedArtist.ProfilePicExtension;
+    }
+}
+<div><img style="display:block; max-width:100%;" alt="@Model.selectedArtist.ArtistFirstName " src="@imageurl" /></div>
 
 <h4>Art Forms</h4>
 <ul>
-    @foreach(var artform in Model.relatedArtForms)
+    @foreach (var artform in Model.relatedArtForms)
     {
-        <li><a href="/artform/details/@artform.ArtFormID">@artform.ArtFormName</a></li>
+        <li>
+            <a href="/artform/details/@artform.ArtFormID">@artform.ArtFormName</a>
+            <a style="color:#ab2020;" href="/Artist/Unassociate/@Model.selectedArtist.ArtistID?ArtFormID=@artform.ArtFormID">[x]</a>
+        </li>
+
+
     }
 </ul>
+
+<h4>Other Art Forms</h4>
+<form method="post" action="/Artist/Associate/@Model.selectedArtist.ArtistID">
+    <select name="ArtFormId">
+        @foreach (var availableArtform in Model.availableArtForms)
+        {
+            <option value="@availableArtform.ArtFormID">@availableArtform.ArtFormName </option>
+        }
+    </select>
+    <input type="submit" value="Add Artform" />
+</form>

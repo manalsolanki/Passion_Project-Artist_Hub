@@ -111,6 +111,37 @@ namespace ArtistsHub.Controllers
             return Ok(artFormDtos);
         }
 
+        /// <summary>
+        /// Gathers information about all artForms which is not interested by a particular Artist
+        /// </summary>
+        /// <returns>
+        /// CONTENT: all artforms in the database, which an artist is not interested in.
+        /// </returns>
+        /// <param name="id">Artist primary key</param>
+        /// <example>
+        /// GET: api/ArtFormData/ListArtFormsNotInterestedByArtist/2
+        /// </example>
+        [HttpGet]
+        [ResponseType(typeof(ArtFormDto))]
+        public IHttpActionResult ListArtFormsNotInterestedByArtist(int id)
+        {
+            List<ArtForm> artForms = db.ArtForms.Where(
+                af => !af.Artists.Any(
+                    at => at.ArtistID == id
+                    )).ToList();
+            List<ArtFormDto> artFormDtos = new List<ArtFormDto>();
+            artForms.ForEach(artForm => artFormDtos.Add(new ArtFormDto()
+            {
+                ArtFormID = artForm.ArtFormID,
+                ArtFormName = artForm.ArtFormName,
+                DisciplineId = artForm.DisciplineID,
+                DisciplineName = artForm.Discipline.DisciplineName
+            }));
+
+            return Ok(artFormDtos);
+        }
+
+
         // POST: api/ArtFormData/UpdateArtForm/5
         //curl -d @artform.json -H "Content-type:application/json" http://localhost:49268/api/ArtFormData/UpdateArtForm/6
         [ResponseType(typeof(void))]

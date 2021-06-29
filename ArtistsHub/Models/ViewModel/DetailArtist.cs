@@ -9,5 +9,6 @@ namespace ArtistsHub.Models.ViewModel
     {
         public ArtistDto selectedArtist { get; set; }
         public IEnumerable<ArtFormDto> relatedArtForms { get; set; }
+        public IEnumerable<ArtFormDto> availableArtForms { get; set; }
     }
 }

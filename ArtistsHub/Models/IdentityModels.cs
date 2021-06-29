@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -34,6 +35,7 @@ namespace ArtistsHub.Models
 
         //Adding the Artist entity to our system.
        // public DbSet<Artist>Artists { get; set; }
+
 
 
         public static ApplicationDbContext Create()

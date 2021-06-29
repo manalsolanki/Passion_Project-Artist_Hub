@@ -114,7 +114,7 @@ namespace ArtistsHub.Controllers
             string url = "disciplineData/UpdateDiscipline/" + id;
             discipline.DisciplineID = id;
             string jsonpayload = jss.Serialize(discipline);
-            //Debug.WriteLine(jsonpayload);
+            Debug.WriteLine(jsonpayload);
             // To do 
             // This is not working yet , not able to update the data.
             // Can update the discipline name but discipline description is not being updated.

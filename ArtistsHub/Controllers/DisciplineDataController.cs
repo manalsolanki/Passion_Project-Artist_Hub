@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ArtistsHub.Models;
+using System.Diagnostics;
 
 namespace ArtistsHub.Controllers
 {
@@ -41,7 +42,7 @@ namespace ArtistsHub.Controllers
             {
                 DisciplineID = discipline.DisciplineID,
                 DisciplineName = discipline.DisciplineName,
-                DisciplineDescription = discipline.DisciplineName
+                DisciplineDescription = discipline.DisciplineDescription
             };
 
             if (discipline == null)
@@ -58,6 +59,8 @@ namespace ArtistsHub.Controllers
         [HttpPost]
         public IHttpActionResult UpdateDiscipline(int id, Discipline discipline)
         {
+            Debug.WriteLine("In Data COntroller");
+            Debug.WriteLine(discipline);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

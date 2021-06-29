@@ -18,6 +18,10 @@ namespace ArtistsHub.Models
         public string ArtistEmail { get; set; }
         public string ArtistDescription { get; set; }
 
+        public bool ArtistHasProfilePic { get; set; }
+        public string ProfilePicExtension { get; set; }
+
+
         //An artist can have many art-forms.
         public ICollection<ArtForm> ArtForms { get; set; }
     }
@@ -31,6 +35,9 @@ namespace ArtistsHub.Models
         public string ArtistPhoneNumber { get; set; }
         public string ArtistEmail { get; set; }
         public string ArtistDescription { get; set; }
+
+        public bool ArtistHasProfilePic { get; set; }
+        public string ProfilePicExtension { get; set; }
 
     }
 }

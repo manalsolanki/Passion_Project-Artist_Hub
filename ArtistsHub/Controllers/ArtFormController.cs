@@ -38,6 +38,7 @@ namespace ArtistsHub.Controllers
         // GET: ArtForm/Details/5
         public ActionResult Details(int id)
         {
+            DetailArtForm viewModel = new DetailArtForm();
             // Objective: Commmunicate with the Artform data api  to retrive a specific art form with id.
             // curl http://localhost:49268/api/ArtFormData/FindArtForm/{id}
 
@@ -45,7 +46,17 @@ namespace ArtistsHub.Controllers
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             ArtFormDto selectedArtForm = response.Content.ReadAsAsync<ArtFormDto>().Result;
-            return View(selectedArtForm);
+            viewModel.selectedArtForm = selectedArtForm;
+
+            // Showing details of artist related to that artform.
+
+            url = "artistdata/ListArtistForArtForm/" + id;
+            response = client.GetAsync(url).Result;
+
+            IEnumerable<ArtistDto> relatedArtists = response.Content.ReadAsAsync<IEnumerable<ArtistDto>>().Result;
+
+            viewModel.relatedArtist = relatedArtists;
+            return View(viewModel);
         }
 
         //GET: ArtForm/Error
