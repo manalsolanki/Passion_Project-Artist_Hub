@@ -2,13 +2,16 @@
 @{
     ViewBag.Title = "DeleteConfirmation";
 }
+<div class="secNav">
+    <a href="/discipline/details/@Model.DisciplineID"> <i class="fas fa-arrow-left icon"></i>  &nbsp;  Details</a>
+</div>
+<div class="alert alert-warning deletebox">
+    <h2>Sure, want to delete ? </h2>
+    <h3>@Model.DisciplineName</h3>
+    <p>Discipline Description :  @Model.DisciplineDescription</p>
+    <form action="/discipline/delete/@Model.DisciplineID" method="post">
+        <input class="btn btn-danger" type="submit" value="Delete" />
+    </form>
+</div>
 
-<h2>DeleteConfirmation</h2>
 
-
-<h3>@Model.DisciplineName</h3>
-<p>Discipline Description :  @Model.DisciplineDescription</p>
-
-<form action="/discipline/delete/@Model.DisciplineID" method="post">
-    <input type="submit" value="Delete"/>
-</form>

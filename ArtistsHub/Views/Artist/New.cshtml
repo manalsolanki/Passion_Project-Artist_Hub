@@ -4,33 +4,42 @@
 }
 
 <h2>Create a Artist</h2>
-
 <form action="/Artist/Create" method="POST">
-    <div>
-        <label>Artist First Name:</label> <input type="text" name="ArtistFirstName" />
+    <div class="row">
+        <div class="col-md-4 margin">
+            <label for="ArtistFirstName">Artist First Name</label>
+            <input type="text" class="form-control" name="ArtistFirstName" />
+        </div>
+        <div class="col-md-4 margin">
+            <label for="ArtistlastName">Artist Last Name</label>
+            <input type="text" name="ArtistLastName" class="form-control" />
+        </div>
     </div>
-    <div>
-        <label>Artist Last Name:</label> <input type="text" name="ArtistLastName" />
+    <div class="row">
+        <div class="col-md-4 margin">
+            <label for="ArtistOccupation">Artist Occupation</label>
+            <input type="text" name="ArtistOccupation" class="form-control"  />
+        </div>
+        <div class="col-md-4 margin">
+            <label for="ArtistPhoneNumber">Artist Phone No.</label>
+            <input type="text" name="ArtistPhoneNumber" class="form-control" />
+        </div>
     </div>
-    <div>
-        <label>Artist Occupation:</label> <input type="text" name="ArtistOccupation" />
+    <div class="row">
+        <div class="col-md-4 margin">
+            <label for="ArtistEmail">Artist Email:</label>
+            <input type="email" name="ArtistEmail" class="form-control" />
+        </div>
+        <div class="col-md-4 margin">
+            <label for="ArtistDescription">Artist Description:</label>
+            <input type="text" name="ArtistDescription" class="form-control" />
+        </div>
     </div>
-    <div>
-        <label>Artist Phone No.:</label> <input type="text" name="ArtistPhoneNumber" />
-    </div>
-    <div>
-        <label>Artist Email:</label> <input type="email" name="ArtistEmail" />
-    </div>
-    <div>
-        <label>Artist Description:</label> <input type="text" name="ArtistDescription" />
-    </div>
-
-
-    <div style="padding:1em;">
-        <input type="submit" value="Add an artist" />
-
+    
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Add an Artist</button>
+        </div>
     </div>
 </form>
-
-
 

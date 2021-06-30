@@ -3,11 +3,13 @@
 @{
     ViewBag.Title = "List";
 }
-<h5><a href="/Discipline/New">Add new Discipline</a></h5>
-<h2>List of Categories</h2>
+<div class="secNav">
+    <h2>List of Categories</h2>
+    <a href="/Discipline/New"> <i class="fas fa-plus icon"></i> &nbsp; New Discipline</a>
+</div>
 <ul>
     @foreach (var discipline in Model)
     {
-        <li><a href="/discipline/Details/@discipline.DisciplineID">@discipline.DisciplineName</a></li>
+        <li class="list"><a href="/discipline/Details/@discipline.DisciplineID">@discipline.DisciplineName</a></li>
     }
 </ul>

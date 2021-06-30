@@ -2,18 +2,22 @@
 @{
     ViewBag.Title = "New";
 }
+<div class="secNav">
+    <a href="/discipline/list"> <i class="fas fa-arrow-left icon"></i>  &nbsp;  List</a>
+</div>
+
 <h2>Create a New Discipline</h2>
 
 <form action="/Discipline/Create" method="POST">
-    <div>
-        <label>Art Form Name:</label> <input type="text" name="DisciplineName" />
+    <div class="form-group">
+        <label for="DisciplineName">Discipline Name</label> 
+        <input type="text" name="DisciplineName" class="form-control"/>
     </div>
-    <div>
-        <label>Discipline Descriptiom</label> <input type="text" name="DisciplineDescription" />
+    <div class="form-group">
+        <label for="DisciplineDescription">Discipline Descriptiom</label> 
+        <input type="text" class="form-control" name="DisciplineDescription" />
     </div>
 
-    <div style="padding:1em;">
-        <input type="submit" value="Add Art Form" />
+        <input type="submit" value="Add Discipline" class="btn btn-primary" />
 
-    </div>
 </form>

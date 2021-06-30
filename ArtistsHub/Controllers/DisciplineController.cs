@@ -63,6 +63,7 @@ namespace ArtistsHub.Controllers
         }
 
         // GET: Discipline/New
+        [Authorize]
         public ActionResult New()
         {
             return View();

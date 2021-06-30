@@ -108,6 +108,7 @@ namespace ArtistsHub.Controllers
         }
 
         // GET: Artist/New
+        [Authorize]
         public ActionResult New()
         {
             return View();
@@ -178,9 +179,14 @@ namespace ArtistsHub.Controllers
                 HttpContent imagecontent = new StreamContent(ProfilePic.InputStream);
                 requestcontent.Add(imagecontent, "artistProfilePic", ProfilePic.FileName);
                 response = client.PostAsync(url, requestcontent).Result;
-
+                return RedirectToAction("Error");
+            }
+            else if (response.IsSuccessStatusCode)
+            {
+                //No image upload, but update still successful
                 return RedirectToAction("List");
             }
+
             else
             {
                 return RedirectToAction("Error");

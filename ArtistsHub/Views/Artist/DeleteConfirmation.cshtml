@@ -2,12 +2,16 @@
 @{
     ViewBag.Title = "DeleteConfirmation";
 }
-
-<h2>DeleteConfirmation</h2>
-<h3>@Model.ArtistFirstName @Model.ArtistLastName</h3>
-<p>Description : @Model.ArtistDescription</p>
-<p>Phone Number : @Model.ArtistPhoneNumber</p>
-<p>Email : @Model.ArtistEmail</p>
-<form method="post" action="/artist/delete/@Model.ArtistID">
-    <input type="submit" value="Delete" />
-</form>
+<div class="secNav">
+    <a href="/artist/details/@Model.ArtistID"> <i class="fas fa-arrow-left icon"></i>  &nbsp;  Details</a>
+</div>
+<div class="deletebox alert alert-warning" >
+    <h2>Are you sure, you want to delete ?</h2>
+    <h3>@Model.ArtistFirstName @Model.ArtistLastName</h3>
+    <p>Description : @Model.ArtistDescription</p>
+    <p>Phone Number : @Model.ArtistPhoneNumber</p>
+    <p >Email : @Model.ArtistEmail</p>
+    <form method="post" action="/artist/delete/@Model.ArtistID">
+        <input type="submit" value="Delete" class="btn btn-danger"/>
+    </form>
+</div>

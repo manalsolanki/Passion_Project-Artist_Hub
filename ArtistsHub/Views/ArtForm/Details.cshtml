@@ -3,21 +3,34 @@
 @{
     ViewBag.Title = "Details";
 }
-<h4><a href="/artform/list">Go back to list</a></h4>
+<div class="secNav">
+    <div>
+        <a href="/artform/list"><i class="fas fa-arrow-left icon"></i>  &nbsp; ArtForm list</a>
+    </div>
+    <div>
+        <a href="/artform/update/@Model.selectedArtForm.ArtFormID"><i class="fas fa-pen icon"></i>&nbsp; Update</a>
+
+       <a href="/artform/deleteConfirmation/@Model.selectedArtForm.ArtFormID"><i class="fas fa-trash icon"></i> &nbsp; Delete </a>
+    </div>
+</div>
 
 
-<h4><a href="/artform/update/@Model.selectedArtForm.ArtFormID">Update this.</a></h4>
 
-<h4><a href="/artform/deleteConfirmation/@Model.selectedArtForm.ArtFormID">Delete this.</a></h4>
-<h2>Details</h2>
+<h2 class="hidden">Details</h2>
 
-<h3>@Model.selectedArtForm.ArtFormName</h3>
-<p> Discipline Name : <a href="/discipline/details/@Model.selectedArtForm.DisciplineId"> @Model.selectedArtForm.DisciplineName</a></p>
-<h3>Related Atists</h3>
+<h3 class="heading">@Model.selectedArtForm.ArtFormName</h3>
+<p><span class="bold">Discipline Name : </span> <a href="/discipline/details/@Model.selectedArtForm.DisciplineId"> @Model.selectedArtForm.DisciplineName</a></p>
+<h3>Related Artists</h3>
 <ul>
+    @{ 
+        if(Model.relatedArtist.Count() == 0)
+        {
+            <li class="alert alert-warning list" >Currently no artist are there.</li>
+        }
+    }
     @foreach(var artist in Model.relatedArtist)
     {
-        <li> <a href="/artist/details/@artist.ArtistID">@artist.ArtistFirstName @artist.ArtistLastName</a></li>
+        <li class="list"> <a href="/artist/details/@artist.ArtistID">@artist.ArtistFirstName @artist.ArtistLastName</a></li>
     }
 </ul>
 

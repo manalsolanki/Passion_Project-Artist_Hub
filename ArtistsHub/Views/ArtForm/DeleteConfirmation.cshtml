@@ -2,12 +2,16 @@
 @{
     ViewBag.Title = "Delete";
 }
+<div class="secNav">
+    <a href="/artform/details/@Model.ArtFormID"> <i class="fas fa-arrow-left icon"></i>  &nbsp;  Details</a>
+</div>
+<div class="alert alert-warning deletebox">
+    <h2>Are you sure, you want to delete?</h2>
+    <h3>@Model.ArtFormName</h3>
+    <p>Discipline Name : <span class="bold"> @Model.DisciplineName</span></p>
+    <form method="post" action="/artform/delete/@Model.ArtFormID">
+        <input type="submit" value="Delete" class="btn btn-danger"/>
+    </form>
+</div>
 
-<h2>Delete</h2>
-
-<h3>@Model.ArtFormName</h3>
-<p>Discipline Name :  @Model.DisciplineName</p>
-<form method="post" action="/artform/delete/@Model.ArtFormID">
-        <input type="submit" value="Delete" />
-</form>
 

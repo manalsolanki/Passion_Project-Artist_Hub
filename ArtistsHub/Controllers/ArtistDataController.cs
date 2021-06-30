@@ -34,7 +34,9 @@ namespace ArtistsHub.Controllers
                 ArtistOccupation = element.ArtistOccupation,
                 ArtistDescription = element.ArtistDescription,
                 ArtistEmail = element.ArtistEmail,
-                ArtistPhoneNumber = element.ArtistPhoneNumber
+                ArtistPhoneNumber = element.ArtistPhoneNumber,
+                ArtistHasProfilePic = element.ArtistHasProfilePic,
+                ProfilePicExtension = element.ProfilePicExtension
             })) ;
                 
             return artistDtos;

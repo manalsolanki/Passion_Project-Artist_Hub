@@ -3,13 +3,35 @@
 @{
     ViewBag.Title = "List";
 }
-<h5><a href="./Artist/New">Add New Artist</a></h5>
-<h2>List of Artists</h2>
+<div class="secNav">
+    <h2 >Artists</h2>
+    <h5><a href="/Artist/New"><i class="fas fa-plus icon"></i> &nbsp; Artist</a></h5>
+</div>
 
-<ul>
-    @foreach (var artist in @Model)
+
+<div class="row">
+    @foreach (var artist in Model)
     {
-        <li><a href="/Artist/Details/@artist.ArtistID">@artist.ArtistFirstName  @artist.ArtistLastName</a></li>
+        <div class="col-md-4">
+            <div class="card list-card">
+                @{
+                    string imageurl = "/Content/Images/Artists/default.jpg";
+                    if (artist.ArtistHasProfilePic)
+                    {
+                        imageurl = "/Content/Images/Artists/" + artist.ArtistID + "." + artist.ProfilePicExtension;
+                    }
+                }
+                <img class="card-img-top" height="150px" src=@imageurl alt="Card image cap">
+                <div class="card-body">
+                    <h2>@artist.ArtistHasProfilePic</h2>
+                    <h3>@artist.ArtistFirstName  @artist.ArtistLastName</h3>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="/Artist/Details/@artist.ArtistID" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
     }
-</ul>
+
+</div>
+
 

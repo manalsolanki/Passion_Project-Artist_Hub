@@ -2,12 +2,14 @@
 @{ 
     ViewBag.Title = "List";
 }
-<h5><a href="/Discipline/New">Add new Art forms</a></h5>
-<h2>List of Art Forms</h2>
+<div class="secNav">
+    <h2>Available Art Forms</h2>
+    <a href="/Artform/New"><i class="fas fa-plus icon"></i> &nbsp; New Art form</a>
+</div>
 
 <ul>
     @foreach (var artform in Model)
     {
-        <li><a href="/ArtForm/Details/@artform.ArtFormID">@artform.ArtFormName</a></li>
+        <li class="list"><a href="/ArtForm/Details/@artform.ArtFormID">@artform.ArtFormName</a></li>
     }
 </ul>

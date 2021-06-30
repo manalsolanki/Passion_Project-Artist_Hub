@@ -2,49 +2,62 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="secNav">
+    <div>
+        <a href="/artist/list"><i class="fas fa-arrow-left icon"></i>  &nbsp; Artist List</a>
 
-<h4><a href="/artist/list">Go back to list</a></h4>
+    </div>
+    <div>
+        <a href="/artist/update/@Model.selectedArtist.ArtistID"><i class="fas fa-pen icon"></i>&nbsp; Update</a>
+        <a href="/artist/deleteConfirmation/@Model.selectedArtist.ArtistID"><i class="fas fa-trash icon"></i> &nbsp; Delete </a>
+    </div>
+</div>
 
-
-<h4><a href="/artist/update/@Model.selectedArtist.ArtistID">Update this.</a></h4>
-
-<h4><a href="/artist/deleteConfirmation/@Model.selectedArtist.ArtistID">Delete this.</a></h4>
-<h2>Details</h2>
-
-<h3>@Model.selectedArtist.ArtistFirstName @Model.selectedArtist.ArtistLastName</h3>
-<h4>Ocupation : @Model.selectedArtist.ArtistOccupation</h4>
-<p>Description : @Model.selectedArtist.ArtistDescription</p>
-<p>Phone Number : @Model.selectedArtist.ArtistPhoneNumber</p>
-<p>Email : @Model.selectedArtist.ArtistEmail</p>
-@{
-    string imageurl = "/Content/Images/Artists/default.jpg";
-    if (Model.selectedArtist.ArtistHasProfilePic)
-    {
-        imageurl = "/Content/Images/Artists/" + Model.selectedArtist.ArtistID+ "." + Model.selectedArtist.ProfilePicExtension;
-    }
-}
-<div><img style="display:block; max-width:100%;" alt="@Model.selectedArtist.ArtistFirstName " src="@imageurl" /></div>
-
-<h4>Art Forms</h4>
-<ul>
-    @foreach (var artform in Model.relatedArtForms)
-    {
-        <li>
-            <a href="/artform/details/@artform.ArtFormID">@artform.ArtFormName</a>
-            <a style="color:#ab2020;" href="/Artist/Unassociate/@Model.selectedArtist.ArtistID?ArtFormID=@artform.ArtFormID">[x]</a>
-        </li>
-
-
-    }
-</ul>
-
-<h4>Other Art Forms</h4>
-<form method="post" action="/Artist/Associate/@Model.selectedArtist.ArtistID">
-    <select name="ArtFormId">
-        @foreach (var availableArtform in Model.availableArtForms)
-        {
-            <option value="@availableArtform.ArtFormID">@availableArtform.ArtFormName </option>
+<h2 class="hidden">Details</h2>
+<div class="row">
+    <div class="col-md-6">
+        @{
+            string imageurl = "/Content/Images/Artists/default.jpg";
+            if (Model.selectedArtist.ArtistHasProfilePic)
+            {
+                imageurl = "/Content/Images/Artists/" + Model.selectedArtist.ArtistID + "." + Model.selectedArtist.ProfilePicExtension;
+            }
         }
-    </select>
-    <input type="submit" value="Add Artform" />
-</form>
+        <div><img style="width:100%;height:100%;" alt="@Model.selectedArtist.ArtistFirstName " src="@imageurl" /></div>
+
+    </div>
+    <div class="col-md-6">
+        <h3 class="heading">@Model.selectedArtist.ArtistFirstName @Model.selectedArtist.ArtistLastName</h3>
+        <h4><span class="bold">Ocupation :</span> @Model.selectedArtist.ArtistOccupation</h4>
+        <p><span class="bold">Description :</span> @Model.selectedArtist.ArtistDescription</p>
+        <p><span class="bold">Phone Number :</span> @Model.selectedArtist.ArtistPhoneNumber</p>
+        <p><span class="bold">Email :</span> @Model.selectedArtist.ArtistEmail</p>
+
+        <h4>Art Forms</h4>
+        <ul>
+            @foreach (var artform in Model.relatedArtForms)
+            {
+                <li class="list">
+                    <a href="/artform/details/@artform.ArtFormID">@artform.ArtFormName</a>
+                    <a  href="/Artist/Unassociate/@Model.selectedArtist.ArtistID?ArtFormID=@artform.ArtFormID">
+                        <i class="fas fa-backspace"></i></a>
+                </li>
+
+
+            }
+        </ul>
+
+        <h4>Other Art Forms</h4>
+        <form method="post" action="/Artist/Associate/@Model.selectedArtist.ArtistID">
+            <select class="form-control margin" name="ArtFormId">
+                @foreach (var availableArtform in Model.availableArtForms)
+                {
+                    <option value="@availableArtform.ArtFormID">@availableArtform.ArtFormName </option>
+                }
+            </select>
+            <input type="submit" class="btn btn-primary mt-3" value="Add Artform" />
+        </form>
+    </div>
+
+</div>
+

@@ -3,19 +3,25 @@
 @{
     ViewBag.Title = "Details";
 }
-<h4><a href="/discipline/list">Go back to list</a></h4>
+<div class="secNav">
+    <div>
+        <a href="/discipline/list"><i class="fas fa-arrow-left icon"></i>  &nbsp; Discipline</a>
+    </div>
+    <div>
+        <a href="/discipline/update/@Model.SelectedDiscipline.DisciplineID"> <i class="fas fa-pen icon"></i>&nbsp; Update</a>
 
-<h4><a href="/discipline/update/@Model.SelectedDiscipline.DisciplineID">Update this.</a></h4>
+        <a href="/discipline/deleteConfirmation/@Model.SelectedDiscipline.DisciplineID"><i class="fas fa-trash icon"></i> &nbsp;Delete</a>
+    </div>
+</div>
 
-<h4><a href="/discipline/deleteConfirmation/@Model.SelectedDiscipline.DisciplineID">Delete this.</a></h4>
-<h2>Details</h2>
+<h2 class="hidden">Details</h2>
 
 <h3>@Model.SelectedDiscipline.DisciplineName</h3>
-<p>Discipline Description :  @Model.SelectedDiscipline.DisciplineDescription</p>
+<p><span class="bold">Discipline Description :</span>  @Model.SelectedDiscipline.DisciplineDescription</p>
 <h2>Related ArtForms</h2>
 <ul>
     @foreach (var artform in Model.RelatedArtForm)
     {
-    <li><a href="/artForm/details/@artform.ArtFormID">@artform.ArtFormName</a></li>
+    <li class="list"><a href="/artForm/details/@artform.ArtFormID">@artform.ArtFormName</a></li>
     }
 </ul>

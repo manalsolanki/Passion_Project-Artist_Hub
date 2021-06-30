@@ -2,19 +2,19 @@
 @{
     ViewBag.Title = "Update";
 }
-
-<h2>Update</h2>
+<div class="secNav">
+    <a href="/discipline/details/@Model.DisciplineID"> <i class="fas fa-arrow-left icon"></i>  &nbsp;  Details</a>
+</div>
+<h2 class="hidden">Update</h2>
 
 <form action="/Discipline/Edit/@Model.DisciplineID" method="POST">
-    <div>
-        <label>Art Form Name:</label> <input type="text" name="DisciplineName" value="@Model.DisciplineName"/>
+    <div class="form-group">
+        <label for="DisciplineName">Discipline Name</label> 
+        <input type="text" class="form-control" name="DisciplineName" value="@Model.DisciplineName"/>
     </div>
-    <div>
-        <label>Discipline Descriptiom</label> <input type="text" name="DisciplineDescription" value="@Model.DisciplineDescription" />
+    <div class="form-group">
+        <label>Discipline Descriptiom</label> 
+        <input type="text" name="DisciplineDescription" class="form-control"value="@Model.DisciplineDescription" />
     </div>
-
-    <div style="padding:1em;">
-        <input type="submit" value="Update" />
-
-    </div>
+        <input type="submit" value="Update" class="btn btn-primary"/>
 </form>

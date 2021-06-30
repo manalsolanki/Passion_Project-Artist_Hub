@@ -19,9 +19,44 @@ namespace ArtistsHub.Controllers
         private JavaScriptSerializer jss = new JavaScriptSerializer();
         static ArtFormController()
         {
+            HttpClientHandler handler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false,
+                //cookies are manually set in RequestHeader
+                UseCookies = false
+            };
             client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:49268/api/");
         }
+
+        /// <summary>
+        /// Grabs the authentication cookie sent to this controller.
+        /// For proper WebAPI authentication, you can send a post request with login credentials to the WebAPI and log the access token from the response. The controller already knows this token, so we're just passing it up the chain.
+        /// 
+        /// Here is a descriptive article which walks through the process of setting up authorization/authentication directly.
+        /// https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/individual-accounts-in-web-api
+        /// </summary>
+        private void GetApplicationCookie()
+        {
+            string token = "";
+            //HTTP client is set up to be reused, otherwise it will exhaust server resources.
+            //This is a bit dangerous because a previously authenticated cookie could be cached for
+            //a follow-up request from someone else. Reset cookies in HTTP client before grabbing a new one.
+            client.DefaultRequestHeaders.Remove("Cookie");
+            if (!User.Identity.IsAuthenticated) return;
+
+            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies.Get(".AspNet.ApplicationCookie");
+            if (cookie != null) token = cookie.Value;
+
+            //collect token as it is submitted to the controller
+            //use it to pass along to the WebAPI.
+            Debug.WriteLine("Token Submitted is : " + token);
+            if (token != "") client.DefaultRequestHeaders.Add("Cookie", ".AspNet.ApplicationCookie=" + token);
+
+            return;
+        }
+
+
         // GET: ArtForm/List
         public ActionResult List()
         {
@@ -84,6 +119,7 @@ namespace ArtistsHub.Controllers
         [HttpPost]
         public ActionResult Create(ArtForm artform)
         {
+            GetApplicationCookie();
             string url = "artformdata/addArtform";
             //objective: add a new artform into the system using the API
             //curl - d @artform.json - H "Content-type:application/json" http://localhost:49268/api/ArtFormData/AddArtForm            string url = "artformdata/addArtForm";
@@ -132,9 +168,11 @@ namespace ArtistsHub.Controllers
         }
 
         // POST: ArtForm/Edit/5
+    
         [HttpPost]
         public ActionResult Edit(int id, ArtForm artForm)
         {
+            
             string url = "artformdata/UpdateArtForm/" + id;
             artForm.ArtFormID = id;
             string jsonpayload = jss.Serialize(artForm);

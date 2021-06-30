@@ -2,35 +2,58 @@
 @{
     ViewBag.Title = "Update";
 }
+<div class="secNav">
+    <a href="/artist/details/@Model.ArtistID"> <i class="fas fa-arrow-left icon"></i>  &nbsp;  Details</a>
+</div>
 
-<h2>Update</h2>
+<h2 class="hidden">Update</h2>
+
 <form action="/Artist/Edit/@Model.ArtistID" method="POST" enctype = "multipart/form-data">
-    <div>
-        <label>Artist First Name:</label> <input type="text" name="ArtistFirstName" value="@Model.ArtistFirstName" />
+    <div class="row">
+        <div class="col-md-6 margin">
+            <label for="ArtistFirstName">Artist First Name</label>
+            <input type="text" class="form-control" name="ArtistFirstName" value="@Model.ArtistFirstName" />
+        </div>
+        <div class="col-md-6 margin">
+            <label for="ArtistlastName">Artist Last Name</label>
+            <input type="text" name="ArtistLastName" class="form-control" value="@Model.ArtistLastName" />
+        </div>
     </div>
-    <div>
-        <label>Artist Last Name:</label> <input type="text" name="ArtistLastName" value="@Model.ArtistLastName"/>
+    <div class="row">
+        <div class="col-md-6 margin">
+            <label for="ArtistOccupation">Artist Occupation</label>
+            <input type="text" name="ArtistOccupation" class="form-control" value="@Model.ArtistOccupation" />
+        </div>
+        <div class="col-md-6 margin">
+            <label for="ArtistPhoneNumber">Artist Phone No.</label>
+            <input type="text" name="ArtistPhoneNumber" class="form-control" value="@Model.ArtistPhoneNumber" />
+        </div>
     </div>
-    <div>
-        <label>Artist Occupation:</label> <input type="text" name="ArtistOccupation" value="@Model.ArtistOccupation" />
+    <div class="row">
+        <div class="col-md-6 margin">
+            <label for="ArtistEmail">Artist Email:</label>
+            <input type="email" name="ArtistEmail" class="form-control" value="@Model.ArtistEmail" />
+        </div>
+        <div class="col-md-6 margin">
+            <label for="ArtistDescription">Artist Description:</label>
+            <input type="text" name="ArtistDescription" class="form-control" value="@Model.ArtistDescription" />
+        </div>
     </div>
-    <div>
-        <label>Artist Phone No.:</label> <input type="text" name="ArtistPhoneNumber" value="@Model.ArtistPhoneNumber" />
+    <div class="row">
+        <div class="col-md-6 margin">
+            <label for="ProfilePic">Upload a Profile picture</label>
+            <input type="file" name="ProfilePic" class="form-control-file">
+        </div>
+        <div class="col-md-6 margin">
+        </div>
     </div>
-    <div>
-        <label>Artist Email:</label> <input type="email" name="ArtistEmail" value="@Model.ArtistEmail"/>
-    </div>
-    <div>
-        <label>Artist Description:</label> <input type="text" name="ArtistDescription" value="@Model.ArtistDescription" />
-    </div>
-    <div>
-        <input type="file" name="ProfilePic" />
-    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
 
-    <div style="padding:1em;">
-        <input type="submit" value="Update an artist" />
-
+        </div>
     </div>
 </form>
+
 
 

@@ -2,16 +2,19 @@
 @{
     ViewBag.Title = "Update";
 }
-<h4><a href="/artform/list">Go back to list</a></h4>
+<div class="secNav">
+    <a href="/artform/details/@Model.SelectedArtForm.ArtFormID"> <i class="fas fa-arrow-left icon"></i>  &nbsp;  Details</a>
+</div>
 
 
 <form action="/ArtForm/edit/@Model.SelectedArtForm.ArtFormID" method="POST">
-    <div>
-        <label>Art Form Name:</label> <input type="text" name="ArtFormName" value="@Model.SelectedArtForm.ArtFormName" />
-    </div>
-    <div>
-        <label>Discipline Id:</label>
-        <select name="DisciplineID">
+    <div class="form-group">
+        <label for="ArtFormName">Art Form Name</label> 
+        <input type="text" class="form-control"name="ArtFormName" value="@Model.SelectedArtForm.ArtFormName" />
+    </div> 
+    <div class="form-group">
+        <label for="DisciplineID">Discipline Name</label>
+        <select name="DisciplineID" class="form-control">
             @foreach(var discipline in Model.DisciplinesOptions)
             {
                 string selected = "";
@@ -20,16 +23,9 @@
                     selected = "selected";
                 }
                 <option value="@discipline.DisciplineID" @selected>@discipline.DisciplineName</option>
-
             }
-            
         </select>
-        <input type="number" name="DisciplineID" value="" />
     </div>
-
-    <div style="padding:1em;">
-        <input type="submit" value="Update Art Form" />
-
-    </div>
+    <input type="submit" class="btn btn-primary" value="Update Art Form" />
 </form>
 
