@@ -17,9 +17,35 @@ namespace ArtistsHub.Controllers
         private JavaScriptSerializer jss = new JavaScriptSerializer();
         static ArtistController()
         {
+            HttpClientHandler handler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false,
+                //cookies are manually set in RequestHeader
+                UseCookies = false
+            };
             client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:49268/api/");
         }
+        private void GetApplicationCookie()
+        {
+            string token = "";
+            //HTTP client is set up to be reused, otherwise it will exhaust server resources.
+            //This is a bit dangerous because a previously authenticated cookie could be cached for
+            //a follow-up request from someone else. Reset cookies in HTTP client before grabbing a new one.
+            client.DefaultRequestHeaders.Remove("Cookie");
+            if (!User.Identity.IsAuthenticated) return;
+
+            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies.Get(".AspNet.ApplicationCookie");
+            if (cookie != null) token = cookie.Value;
+
+            //collect token as it is submitted to the controller
+            //use it to pass along to the WebAPI.
+            Debug.WriteLine("Token Submitted is : " + token);
+            if (token != "") client.DefaultRequestHeaders.Add("Cookie", ".AspNet.ApplicationCookie=" + token);
+
+            return;
+        }
+
         // GET: Artist/List
         public ActionResult List()
         {
@@ -69,8 +95,10 @@ namespace ArtistsHub.Controllers
 
         // POST : Artist/Associate/{artistId}
         [HttpPost]
+        [Authorize]
         public ActionResult Associate(int id, int ArtFormId)
         {
+            GetApplicationCookie();
             Debug.WriteLine("Associated artform" + ArtFormId);
 
             //call our api to associate artist with artforms.
@@ -88,8 +116,10 @@ namespace ArtistsHub.Controllers
 
         // POST :Artist/UnAssociate/{id}?ArtFormID={ArtFormID}
         [HttpGet]
+        [Authorize]
         public ActionResult UnAssociate(int id, int ArtFormId)
         {
+            GetApplicationCookie();
             //call our api to unassociate artist with artforms.
             string url = "ArtistData/UnAssociateArtFormsWithArtist/" + id + "/" + ArtFormId;
             Debug.WriteLine("URL " + url);
@@ -116,8 +146,10 @@ namespace ArtistsHub.Controllers
 
         // POST: Artist/Create
         [HttpPost]
+        [Authorize]
         public ActionResult Create(Artist artist)
         {
+            GetApplicationCookie();
             string url = "artistdata/addArtist";
             //objective: Communicate with artist data controller to add a new artist.
             //curl - d @artform.json - H "Content-type:application/json" http://localhost:49268/api/ArtistData/AddArtist            string url = "artformdata/addArtForm";
@@ -139,6 +171,7 @@ namespace ArtistsHub.Controllers
         }
 
         // GET: Artist/Update/5
+        [Authorize]
         public ActionResult Update(int id)
         {
             // Objective: Commmunicate with the Artist data api  to retrive a specific artist form with id.
@@ -153,11 +186,13 @@ namespace ArtistsHub.Controllers
 
         // POST: Artist/Edit/5
         [HttpPost]
+        [Authorize]
+
         public ActionResult Edit(int id, Artist artist ,HttpPostedFileBase ProfilePic)
         {
             // objective : Communicate with the artist controller to update the artist having specific id.
             //curl -d @artist.json -H "Content-type:application/json" http://localhost:49268/api/ArtistData/UpdateArtist/3
-
+            GetApplicationCookie();
             string url = "artistdata/UpdateArtist/" + id;
             artist.ArtistID = id;
             string jsonpayload = jss.Serialize(artist);
@@ -179,7 +214,7 @@ namespace ArtistsHub.Controllers
                 HttpContent imagecontent = new StreamContent(ProfilePic.InputStream);
                 requestcontent.Add(imagecontent, "artistProfilePic", ProfilePic.FileName);
                 response = client.PostAsync(url, requestcontent).Result;
-                return RedirectToAction("Error");
+                return RedirectToAction("List");
             }
             else if (response.IsSuccessStatusCode)
             {

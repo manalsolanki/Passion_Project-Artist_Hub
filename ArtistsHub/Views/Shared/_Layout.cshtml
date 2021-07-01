@@ -30,8 +30,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Artists", "Artists", "Artist/List")</li>
-                    <li>@Html.ActionLink("Artforms", "Artforms", "Artform/List")</li>
+                    <li class="nav-link">@Html.ActionLink("Artists", "Artists", "Artist/List")</li>
+                    <li class="nav-link">@Html.ActionLink("Artforms", "Artforms", "Artform/List")</li>
+                    <li class="nav-link">@Html.ActionLink("Disciplines", "Discipline", "Discipline/List")</li>
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

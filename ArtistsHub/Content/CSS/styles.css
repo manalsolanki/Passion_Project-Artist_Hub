@@ -2,9 +2,12 @@
     font-family: 'Akaya Kanadaka', cursive;
     text-decoration:none;
     font-size:2.5em;
+    color:white;
+    padding-left:0.5em
 }
 .logo:hover{
     text-decoration:none;
+    color:blanchedalmond;
 }
 body {
     background-image: url("../Images/background-image.gif")
@@ -23,7 +26,46 @@ footer{
     width:40px;
     height:40px;
 }
+.navbar-inverse {
+    background-color: #c23b61;
+    border-color: #c23b61;
+}
+.navbar-inverse .navbar-nav > li > a {
+        color: blanchedalmond;
+    }
 
+.banner-image{
+    position:relative;
+    margin-top:1.5em;
+}
+.banner-image img{
+    width:100%;
+}
+.banner-text {
+    width: 365px;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translate(0,-50%);
+    background-color: rgba(178, 5, 0, 0.60);
+    border: 1px solid rgba(178, 5, 0, 0.60);
+    border-radius: 5px;
+    color: white;
+    padding:1em;
+}
+.banner-text h2{
+    margin:0;
+}
+.about-us{
+    padding:1em;
+    margin-top:1.5em;
+    text-align:center;
+    max-width:768px;
+    margin-left:auto;
+    margin-right:auto;
+    border:1px solid brown;
+    border-radius:5px;
+}
 .list-card{
     text-align:center;
 }
@@ -33,17 +75,16 @@ footer{
     display:flex;
     justify-content:space-between;
 }
-.secNav a{
-    background-color:cadetblue;
-    color:black;
-    font-size:1em;
-    padding:1em;
-    font-weight:bold;
-    border-radius:5px;
-}
+    .secNav a {
+        background-color: #efea62;
+        color: rgba(178, 5, 0, 0.60);
+        font-size: 1em;
+        padding: 1em;
+        font-weight: bold;
+        border-radius: 5px;
+    }
 .secNav a:hover{
     text-decoration:none;
-    color:white;
 }
 .bold{
     font-weight:bold;

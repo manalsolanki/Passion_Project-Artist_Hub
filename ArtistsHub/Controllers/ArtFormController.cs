@@ -99,7 +99,7 @@ namespace ArtistsHub.Controllers
         {
             return View();
         }
-
+        [Authorize]
         // GET: ArtForm/New
         public ActionResult New()
         {
@@ -117,6 +117,7 @@ namespace ArtistsHub.Controllers
 
         // POST: ArtForm/Create
         [HttpPost]
+        [Authorize]
         public ActionResult Create(ArtForm artform)
         {
             GetApplicationCookie();
@@ -141,6 +142,7 @@ namespace ArtistsHub.Controllers
         }
 
         // GET: ArtForm/Update/5
+        [Authorize]
         public ActionResult Update(int id)
         {
             UpdateArtForm viewModel = new UpdateArtForm();
@@ -170,9 +172,10 @@ namespace ArtistsHub.Controllers
         // POST: ArtForm/Edit/5
     
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(int id, ArtForm artForm)
         {
-            
+            GetApplicationCookie();
             string url = "artformdata/UpdateArtForm/" + id;
             artForm.ArtFormID = id;
             string jsonpayload = jss.Serialize(artForm);
@@ -193,6 +196,7 @@ namespace ArtistsHub.Controllers
         }
 
         // GET: ArtForm/DeleteConfirmation/5
+        [Authorize]
         public ActionResult DeleteConfirmation(int id)
         {
             string url = "artformdata/findartform/" + id;
@@ -203,8 +207,10 @@ namespace ArtistsHub.Controllers
 
         // POST: ArtForm/Delete/5
         [HttpPost]
+        [Authorize]
         public ActionResult Delete(int id)
         {
+            GetApplicationCookie();
             string url = "artformdata/deleteArtForm/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
