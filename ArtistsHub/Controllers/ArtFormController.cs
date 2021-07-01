@@ -175,7 +175,7 @@ namespace ArtistsHub.Controllers
         [Authorize]
         public ActionResult Edit(int id, ArtForm artForm)
         {
-            GetApplicationCookie();
+            GetApplicationCookie();// for authorization
             string url = "artformdata/UpdateArtForm/" + id;
             artForm.ArtFormID = id;
             string jsonpayload = jss.Serialize(artForm);

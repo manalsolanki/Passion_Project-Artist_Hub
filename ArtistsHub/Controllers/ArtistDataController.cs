@@ -18,7 +18,10 @@ namespace ArtistsHub.Controllers
     public class ArtistDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        /// <summary>
+        /// List all the artit from the db
+        /// </summary>
+        /// <returns>A list of artist</returns>
         // GET: api/ArtistData/ListArtists
         [HttpGet]
         public IEnumerable<ArtistDto> ListArtists()
@@ -41,7 +44,11 @@ namespace ArtistsHub.Controllers
                 
             return artistDtos;
         }
-
+        /// <summary>
+        /// Finds the artist by artist id
+        /// </summary>
+        /// <param name="id">Artist ID - Primary key</param>
+        /// <returns>A artist.</returns>
         // GET: api/ArtistData/FindArtist/5
         [ResponseType(typeof(Artist))]
         [HttpGet]
@@ -67,10 +74,14 @@ namespace ArtistsHub.Controllers
 
             return Ok(artistDto);
         }
-
+       /// <summary>
+       /// List the artists for a particular art form.
+       /// </summary>
+       /// <param name="id">Art form id</param>
+       /// <returns>A list of artist./returns>
         // Artform id will be included as part of url.
-        /// GET: api/ArtistData/ListArtistForArtForm/2
-
+        // GET: api/ArtistData/ListArtistForArtForm/2
+        
         [HttpGet]
         [ResponseType(typeof(ArtistDto))]
         public IHttpActionResult ListArtistForArtForm(int id)

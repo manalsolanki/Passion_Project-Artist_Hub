@@ -15,7 +15,7 @@ namespace ArtistsHub.Controllers
     public class ArtFormDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        // To list all the art forms.
         // GET: api/ArtFormData/ListArtForms
         [HttpGet]
         public IEnumerable<ArtFormDto> ListArtForms()
@@ -31,7 +31,11 @@ namespace ArtistsHub.Controllers
             }));
             return artFormDtos;
         }
-
+        /// <summary>
+        /// Find artform details by id.
+        /// </summary>
+        /// <param name="id">Artform id</param>
+        /// <returns>A selected artform.</returns>
         // GET: api/ArtFormData/FindArtForm/1
         [ResponseType(typeof(ArtForm))]
         [HttpGet]

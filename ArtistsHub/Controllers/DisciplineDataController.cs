@@ -16,7 +16,10 @@ namespace ArtistsHub.Controllers
     public class DisciplineDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        /// <summary>
+        /// To list all the disciplines
+        /// </summary>
+        /// <returns></returns>
         // GET: api/DisciplineData/ListDisciplines
         [HttpGet]
         public IEnumerable<DisciplineDto> ListDisciplines()
@@ -32,6 +35,11 @@ namespace ArtistsHub.Controllers
             return disciplineDtos;
         }
 
+        /// <summary>
+        /// Find the dicipline by Id.
+        /// </summary>
+        /// <param name="id">Discipline Id</param>
+        /// <returns>A specific discipline</returns>
         // GET: api/DisciplineData/FindDiscipline/5
         [ResponseType(typeof(Discipline))]
         [HttpGet]
